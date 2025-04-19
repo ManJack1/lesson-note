@@ -1,2 +1,3 @@
 # lesson-note
-dev-version
+
+stable-version
