@@ -1,2 +1,10 @@
 \contentsline {chapter}{\numberline {第一章\hspace {.3em}}Linear Equations}{1}{chapter.1}%
+<<<<<<< HEAD
 \contentsline {paragraph}{命题1}{3}{definition.1.0.1}%
+=======
+\contentsline {section}{\numberline {1.1}线性方程组的解法}{1}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}解线性方程组的矩阵消元法}{1}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}行列式}{1}{subsection.1.1.2}%
+\contentsline {subsubsection}{逆序数}{1}{subsection.1.1.2}%
+\contentsline {subsubsection}{n阶行列式的定义}{2}{theorem.1.1.2}%
+>>>>>>> 1e373b6660f20acee3aa5dce9c0cb74bbbaae4bf

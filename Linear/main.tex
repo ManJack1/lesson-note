@@ -114,48 +114,48 @@
 
 % Start your content here
 
-\section*{线性方程组的解法}
-
-\subsection*{解线性方程组的矩阵消元法}
+\section{线性方程组的解法}
+\subsection{解线性方程组的矩阵消元法}
 
 \begin{example}
   将前面系数提取出来记录为：
-  \[
+  \begin{align}
     \begin{cases}
       x_1+3x_{2}+x_3=2 \\
       3x_1+4x_2+2x_3 = 9 \\
       -x_1-5x_{2}+4x_{3} = 10\\
       2x_{1}+7x_{2} +x_{3}= 1
-    \end{cases}
-    \longrightarrow
+    \end{cases} \longrightarrow
     \begin{bmatrix}
       1 &3&1&2\\
       3&4&2&9\\
       -1&-5&4&10\\
       2&7&1&1
     \end{bmatrix}
-  \]
+  \end{align}
+
   将上述例子化简后的结果为：
-  \[
+  \begin{align}
     \begin{bmatrix}
       1 & 3 & 1 & 2 \\
       0 & 1 & -1 & -1 \\
       0 & 0 & 3 & 6 \\
       0 & 0 & 0 & 0 \\
     \end{bmatrix}
-  \]
+  \end{align}
 \end{example}
 
 矩阵的初等行变换：
-考虑一个简单的二元线性方程组：
-\[
+
+\begin{align}
   \begin{cases}
     a_{11}x_1+a_{12}x_2 = b_1 \\
     a_{21}x_1+a_{22}x_2 = b_2 \\
   \end{cases}
-\]
-我们可以将其增广矩阵化为：
-\[
+\end{align}
+
+我们可以将其化为：
+\begin{align}
   \begin{bmatrix}
     a_{11} & a_{12} & b_1 \\
     a_{21} & a_{22} & b_2 \\
@@ -166,161 +166,141 @@
     0 & a_{22} - \frac{a_{21}}{a_{11}} a_{12} & b_2 -
     \frac{a_{21}}{a_{11}} b_1 \\
   \end{bmatrix}
-\]
-这里假设 $a_{11} \neq 0$。
+\end{align}
 
-\subsection*{行列式}
-
-\subsubsection*{逆序数}
+\subsection{行列式}
+\subsubsection{逆序数}
 
 \begin{theorem}
-  对换改变n元排列逆序数的奇偶性。
+  对换改变n元排列逆序数的奇偶性
 \end{theorem}
 
-\begin{proof}
-  首先考虑相邻元素对换的情况。若序列 $n$ 的排列为：
-  \[
-    n = (\dots, i, j, \dots)
-  \]
-  对换 $i, j$ 后得到：
-  \[
-    n_{1} = (\dots, j, i, \dots)
-  \]
-  则逆序数 $\tau$ 的变化只有两种情况：
-  \[
-    \begin{cases}
-      \tau(n_{1}) = \tau(n) - 1 & \text{如果 } (i, j) \text{ 是一个逆序对} \\
-      \tau(n_{1}) = \tau(n) + 1 & \text{如果 } (i, j) \text{ 不是一个逆序对}
-    \end{cases}
-  \]
-  在这两种情况下，逆序数的奇偶性都发生了改变。
+\noindent\textbf{证明:}
+首先考虑相邻元素对换的情况,若序列n的排列为：
+\begin{align}
+  n =
+  \begin{pmatrix}
+    \cdots &i & j&\cdots\\
+  \end{pmatrix}
+\end{align}
 
-  接下来考虑相距较远元素对换的情况。若 $n$ 的排列为：
-  \[
-    n = (\dots, i, \overbrace{\dots}^{k \text{个元素}}, j, \dots)
-  \]
-  我们可以通过一系列相邻对换来实现 $i$ 和 $j$ 的对换。首先，将 $j$ 向左移动 $k+1$ 次，越过 $k$ 个中间元素和元素 $i$，得到：
-  \[
-    (\dots, j, i, \dots, \dots)
-  \]
-  这一步进行了 $k+1$ 次相邻对换。然后，将 $i$ 向右移动 $k$ 次，越过它右边的 $k$ 个中间元素，到达原来 $j$ 的位置，得到：
-  \[
-    (\dots, j, \overbrace{\dots}^{k \text{个元素}}, i, \dots)
-  \]
-  这一步进行了 $k$ 次相邻对换。
-  总共进行了 $k+1+k = 2k+1$ 次相邻对换。由于 $2k+1$
-  是奇数，每次相邻对换都改变奇偶性，所以总共进行了奇数次奇偶性改变，最终排列 $n_1$ 的逆序数 $\tau(n_1)$
-  的奇偶性与原排列 $n$ 的逆序数 $\tau(n)$ 相反。
-\end{proof}
+对换$i,j$后：
+\begin{align}
+  n_{1} =
+  \begin{pmatrix}
+    \cdots&j&i&\cdots
+  \end{pmatrix}
+\end{align}
+
+则无非两种情况：
+\begin{align}
+  \begin{cases}
+    \tau(n_{1}) = \tau(n) - 1 & \text{(i,j)是逆序对} \\
+    \tau(n_{1}) = \tau(n) + 1 & \text{(i,j)不是逆序对}
+  \end{cases}
+\end{align}
+
+那有了相邻的情况，借此我们可以推广到相距较远的情况
+若n的排列为：
+\begin{align}
+  n =
+  \begin{pmatrix}
+    \cdots&i&\overbrace{\cdots}^{k}&j&\cdots \\
+  \end{pmatrix}
+\end{align}
+
+则我们可以逐项移动，当j移到到i有，此时移到了k+1次。
+\begin{align}
+  \begin{pmatrix}
+    \cdots&j&i&\cdots&\cdots \\
+  \end{pmatrix}
+\end{align}
+
+在将i移动到j的位置则有k次：
+\begin{align}
+  \begin{pmatrix}
+    \cdots&j&\overbrace{\cdots}^{k}&i&\cdots \\
+  \end{pmatrix}
+\end{align}
+
+这时候完成了对换，总相邻对换数为k+1+k = 2k+1,所以改变了奇偶性。
 
 \begin{theorem}
-  若对一个标准顺序排列（$1, 2, \dots, n$）的n元排列进行k次对换得到新的排列，则新排列逆序数的奇偶性与k的奇偶性相同。
+  若对一个完全顺序排列的n元排列进行k次对换，则其逆序数的奇偶性与k的奇偶性相同。
 \end{theorem}
-\begin{proof}
-  标准排列的逆序数为 0（偶数）。根据上一个定理，每次对换改变逆序数的奇偶性。进行 $k$ 次对换后，逆序数的奇偶性改变了 $k$
-  次。因此，最终排列的逆序数的奇偶性与 $k$ 的奇偶性相同。
-\end{proof}
 
-\subsubsection*{n阶行列式的定义}
+\subsubsection{n阶行列式的定义}
 
 \begin{definition}
-  设 $A = (a_{ij})$ 是一个 $n \times n$ 矩阵。其行列式定义为：
-  \[
-    \det(A) = |A| = \left|
+  设
+  \begin{align}
+    A = (a_{ij})  = \left|
     \begin{matrix}
       a_{11} & a_{12} & \cdots & a_{1n} \\
       a_{21} & a_{22} & \cdots & a_{2n} \\
       \vdots & \vdots & \ddots & \vdots \\
       a_{n1} & a_{n2} & \cdots & a_{nn}
-    \end{matrix}\right| = \sum_{j_1j_2 \cdots j_n} (-1)^{\tau(j_1j_2
-    \cdots j_n)} a_{1j_1}a_{2j_2}\cdots a_{nj_n}
-  \]
-  其中 $j_1j_2 \cdots j_n$ 是 $1, 2, \dots, n$ 的一个排列，$\tau(j_1j_2 \cdots
-  j_n)$ 是该排列的逆序数，求和遍及所有 $n!$ 个不同的排列。
+    \end{matrix}\right| = \sum\limits_{j_1j_2 \cdots
+    j_n}^{}(-1)^{\tau(j_1j_2 \cdots j_n)}a_{1j_1}a_{2j_2}\cdots a_{nj_n}
+  \end{align}
+
+  n阶的行列式记作 $\left|A\right|$ 或 $\mathrm{det} \textbf{A}$
 \end{definition}
 
-n阶的行列式记作 $|A|$ 或 $\det(A)$。
-
-主对角线下方全为0的行列式称为\textbf{上三角行列式}。主对角线上的元素称为主对角线元素。
-\[
-  A =
-  \begin{vmatrix}
+主对角线下方全为0的行列式称为\textbf{上三角行列式}，主对角线上的元素称为主对角线元素。
+\begin{align}
+  A = \left|
+  \begin{matrix}
     a_{11} & a_{12} & a_{13} & \cdots & a_{1n} \\
     0      & a_{22} & a_{23} & \cdots & a_{2n} \\
     0      & 0      & a_{33} & \cdots & a_{3n} \\
     \vdots & \vdots & \vdots & \ddots & \vdots \\
     0      & 0      & 0      & \cdots & a_{nn}
-  \end{vmatrix}
-\]
-根据行列式的定义 $\det(A) = \sum_{j_1j_2 \cdots j_n} (-1)^{\tau(j_1j_2 \cdots
-j_n)} a_{1j_1}a_{2j_2}\cdots a_{nj_n}$，考虑求和中的每一项
-$a_{1j_1}a_{2j_2}\cdots a_{nj_n}$。
-如果这一项非零，则必须满足 $a_{ij_i} \neq 0$ 对所有 $i=1, \dots, n$ 成立。
-对于上三角矩阵：
-\begin{itemize}
-  \item 从最后一行 $i=n$ 开始，由于 $a_{n k} = 0$ 对 $k < n$，只有当 $j_n=n$ 时
-    $a_{nj_n}$ 才可能非零。
-  \item 考虑倒数第二行 $i=n-1$。由于 $a_{(n-1)k} = 0$ 对 $k < n-1$，且 $j_n=n$
-    已被选定，所以 $j_{n-1}$ 只能是 $n-1$ (因为 $j_{n-1} \neq j_n=n$)，才可能使
-    $a_{(n-1)j_{n-1}}$ 非零。
-  \item 以此类推，从下往上，第 $i$ 行的列指标 $j_i$ 必须满足 $j_i \ge i$。同时，由于 $j_1,
-    \dots, j_n$ 是 $1, \dots, n$ 的一个排列，它们必须互不相同。结合这两个条件，唯一可能使乘积项非零的排列是
-    $j_1=1, j_2=2, \dots, j_n=n$。
-\end{itemize}
-\[
+  \end{matrix}\right|
+\end{align}
+
+由于 $\left|A\right| = \sum\limits_{j_1j_2 \cdots
+j_n}^{}(-1)^{\tau(j_1j_2 \cdots j_n)}a_{1j_1}a_{2j_2}\cdots a_{n
+j_n}$,从最下面往上取我们可以得知，
+\begin{align}
   \begin{cases}
-    a_{nj_n} \neq 0 \implies j_n = n \\
-    a_{(n-1)j_{n-1}} \neq 0 \implies j_{n-1} = n-1 \text{ (因为 }
-    j_{n-1} \neq j_n \text{)} \\
-    \vdots \\
-    a_{1j_1} \neq 0 \implies j_1 = 1
+    a_{nj_n} = a_{nn} & j_{n} = n\\
+    a_{(n-1)j_{n-1}} = a_{(n-1)(n-1)} & j_{(n-1)} = n-1\\
+    \vdots & \\
+    a_{ij_i} = a_{ii} & j_i = i\\
+    a_{1j_1} = a_{11} & j_1 = 1\\
   \end{cases}
-\]
-这个排列是 $1, 2, \dots, n$，其逆序数 $\tau(12\dots n) =
-0$。因此，行列式定义中的求和只有一项是非零的，即对应于主对角线元素的乘积。
-所以，上三角行列式的值为：$\det(A) = (-1)^0 a_{11}a_{22}\cdots a_{nn} =
-\prod_{i=1}^{n} a_{ii}$。
+\end{align}
 
-\paragraph{命题1}
-给定行指标的一个排列 $i_1, i_2, \dots, i_n$，$A$ 的行列式也可以表示为：
-\[
-  \det(A) = \sum_{k_1k_2 \cdots k_n} (-1)^{\tau(i_1i_2 \cdots i_n) +
-  \tau(k_1k_2 \cdots k_n)} a_{i_1k_1}a_{i_2k_2}\cdots a_{i_nk_n}
-\]
-其中求和遍及列指标的所有排列 $k_1k_2 \cdots k_n$。
+则上三角n的行列式的值为：$\left|A\right| = \prod\limits_{i=1}^{n}a_{ii} =
+a_{11}a_{22}\cdots a_{nn}$
 
-\begin{proof}
-  考虑行列式定义中的任意一项 $(-1)^{\tau(j_1j_2 \cdots j_n)}
-  a_{1j_1}a_{2j_2}\cdots a_{nj_n}$。
-  我们可以将因子 $a_{1j_1}a_{2j_2}\cdots a_{nj_n}$ 按照给定的行指标排列 $i_1, i_2,
-  \dots, i_n$ 重新排序。设 $a_{i_1k_1}a_{i_2k_2}\cdots a_{i_nk_n}$ 是
-  $a_{1j_1}a_{2j_2}\cdots a_{nj_n}$ 重新排序后的形式。
-  这意味着，当 $i_p=r$ 时，必然有 $k_p=j_r$。也就是说，$(i_1, k_1), (i_2, k_2), \dots,
-  (i_n, k_n)$ 与 $(1, j_1), (2, j_2), \dots, (n, j_n)$ 是相同的一组成对下标，只是顺序不同。
-  将行指标排列 $i_1i_2 \cdots i_n$ 通过 $s = \tau(i_1i_2 \cdots i_n)$
-  次相邻对换恢复成标准顺序 $1, 2, \dots, n$，同时对列指标 $k_1k_2 \cdots k_n$
-  进行同样的伴随对换，会得到排列 $j_1j_2 \cdots j_n$。
-  根据排列理论，两个排列同时进行相同的 $s$ 次对换后，它们的逆序数奇偶性之和保持不变，或者说 $\tau(j_1j_2 \cdots
-  j_n)$ 的奇偶性与 $\tau(i_1i_2 \cdots i_n) + \tau(k_1k_2 \cdots k_n)$ 的奇偶性相同。
-  即 $(-1)^{\tau(j_1j_2 \cdots j_n)} = (-1)^{\tau(i_1i_2 \cdots i_n) +
-  \tau(k_1k_2 \cdots k_n)}$。
-  因此，
-  \[
-    (-1)^{\tau(j_1j_2 \cdots j_n)} a_{1j_1}a_{2j_2}\cdots a_{nj_n} =
-    (-1)^{\tau(i_1i_2 \cdots i_n) + \tau(k_1k_2 \cdots k_n)}
-    a_{i_1k_1}a_{i_2k_2}\cdots a_{i_nk_n}
-  \]
-  对所有排列求和，即可得到两种定义形式是等价的：
-  \[
-    \sum_{j_1j_2 \cdots j_n} (-1)^{\tau(j_1j_2 \cdots
-    j_n)}a_{1j_1}a_{2j_2}\cdots a_{nj_n} = \sum_{k_1k_2 \cdots k_n}
-    (-1)^{\tau(i_1i_2 \cdots i_n)+\tau(k_1k_2 \cdots
-    k_n)}a_{i_1k_1}a_{i_2k_2}\cdots a_{i_nk_n}
-  \]
-  这证明了命题。这个命题说明行列式也可以按任意行（或类似的可以证明按任意列）展开，符号取决于行排列和列排列的逆序数。
-\end{proof}
+\subsubsection*{命题1}
+给定行指标的一个排列$i_1,i_2,\cdots,i_n$,A的行列式为
+\begin{align}
+  \left|A\right| = \sum\limits_{k_1k_2 \cdots
+  k_n}^{}(-1)^{\tau(i_1i_2 \cdots i_n)+\tau(k_1k_2 \cdots
+  k_n)}a_{i_1k_1}a_{i_2k_2}\cdots a_{i_nk_n}
+\end{align}
 
-\[
-  \det(A)
-.\]
+\noindent\textbf{证明:}
+对于单个排列,假设该排列 $a_{i_1k_1}a_{i_2k_2}\cdots a_{i_nk_n}$ 经过s次变换成为
+$a_{1s_1}a_{2s_2}\cdots a_{ns_n}$，则该排列的逆序数为$\tau(s_1s_2 \cdots
+s_n)$，则对于行的逆序数我们可得知$\tau(i_1 i_2 \cdots i_n) = s$,且有对于列逆序数
+\begin{align}
+  (-1)^{\tau(s_1s_2 \cdots s_n)} = (-1)^{\tau(k_1k_2 \cdots k_n) + s}
+  = (-1)^{\tau(i_1i_2 \cdots i_n) + \tau(k_1k_2 \cdots k_n)}
+\end{align}
+
+则由此变换我们可以得知：
+\begin{align}
+  \left|A\right| = \sum\limits_{k_1k_2 \cdots
+  k_n}^{}(-1)^{\tau(i_1i_2 \cdots i_n)+\tau(k_1k_2 \cdots
+  k_n)}a_{i_1k_1}a_{i_2k_2}\cdots a_{i_nk_n} = \sum\limits_{j_1j_2
+  \cdots j_n}^{}(-1)^{\tau(j_1j_2 \cdots j_n)}a_{1j_1}a_{2j_2}\cdots a_{nj_n}
+\end{align}
+
+$j_1,j_2,\cdots,j_n$ 是 $i_1,i_2,\cdots,i_n$ 变换成全排列 $1,2,\cdots,n$ 后
+$k_1,k_2,\cdots,k_n$
+的对应变化。所以第一步行逆序数相加是为了将行变为全排列，因为行列同排列的逆序数也需要加上行的逆序数变为全排列后的逆序数。
 \end{document}
