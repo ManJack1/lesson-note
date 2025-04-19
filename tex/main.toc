@@ -1,0 +1,2 @@
+\contentsline {chapter}{\numberline {第一章\hspace {.3em}}Linear Equations}{1}{chapter.1}%
+\contentsline {paragraph}{命题1}{3}{definition.1.0.1}%
